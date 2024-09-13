@@ -1,2 +1,2 @@
-# Semester-3-QAP-1
-Repository for QAP 1 of semester 3
+# Name : Password Generator
+Create a password for users based on the arguemnts they provided from flags.
