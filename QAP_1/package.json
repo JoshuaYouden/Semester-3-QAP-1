@@ -1,0 +1,17 @@
+{
+  "name": "password-generator",
+  "version": "1.0.0",
+  "description": "generates a password based on user arguments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "password-generator": "./index.js"
+  },
+  "author": "Joshua Youden",
+  "license": "MIT",
+  "dependencies": {
+    "npx": "^10.2.2"
+  }
+}
