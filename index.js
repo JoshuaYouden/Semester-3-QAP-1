@@ -55,3 +55,9 @@ if (length !== -1) {
     return;
   }
 }
+
+const password = generatePassword(lengthPassword);
+
+console.log(`Password: ${password}`);
+
+// End of program.
