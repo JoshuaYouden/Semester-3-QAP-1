@@ -38,13 +38,15 @@ function printHelpMessage() {
     --help, -h  --> Displays this help message
     --length, -l --> Specify the length of the password (Default: 8)
     --numbers, -n --> Include numbers in the password
+    --capitals, -c --> Include capitals in the password
+    --symbols, -s --> Include symbols in the password
     
     Example: 
-    password-generator --length 8 --numbers
-    password-generator -l 8 -n
+    password-generator --length 8 --numbers --capitals --symbols
+    password-generator -l 8 -n -c -s
     
     Output: 
-    "Password: zll6fk2v"`
+    "Password: Zl^6fK2$"`
   );
 }
 
@@ -59,6 +61,8 @@ if (userArguments.includes("--help") || userArguments.includes("-h")) {
 // These are the default settings if none are provided.
 let lengthPassword = 8;
 let includeNums = false;
+let includeCaps = false;
+let includeSyms = false;
 
 userArguments.forEach((arg, index) => {
   switch (arg) {
@@ -78,10 +82,23 @@ userArguments.forEach((arg, index) => {
     case "-n":
       includeNums = true;
       break;
+    case "--capitals":
+    case "-c":
+      includeCaps = true;
+      break;
+    case "--symbols":
+    case "-s":
+      includeSyms = true;
+      break;
   }
 });
 
-const password = generatePassword(lengthPassword, includeNums);
+const password = generatePassword(
+  lengthPassword,
+  includeNums,
+  includeCaps,
+  includeSyms
+);
 
 console.log(`Password: ${password}`);
 
