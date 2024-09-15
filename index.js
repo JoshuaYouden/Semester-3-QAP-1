@@ -3,7 +3,7 @@
 const process = require("node:process");
 
 // Function that generates a password.
-function generatePassword(length = 8, includeNums = false) {
+function generatePassword(length = 8) {
   let characters = "abcdefghijklmnopqrstuvwxyz";
   let password = "";
 
