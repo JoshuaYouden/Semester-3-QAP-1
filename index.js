@@ -2,14 +2,29 @@
 
 const process = require("node:process");
 
-// function message if the user needs help
+// Function that generates a password.
+function generatePassword(length = 8) {
+  const characters = "abcdefghijklmnopqrstuvwxyz";
+  let password = "";
+
+  for (let i = 0; i < length; i++) {
+    const random = Math.floor(Math.random() * characters.length);
+    password += characters[random];
+  }
+
+  return password;
+}
+
+// Function that prints this message if the user inputs "--help" or "-h".
 function printHelpMessage() {
   console.log(
-    `Usage: password-generator "<Text>" 
+    `Usage: password-generator --length <Number> 
+    
     Example: 
-    password-generator length: "8" 
+    password-generator --length 8
+    password-generator -l 8
     
     Output: 
-    "password`
+    "Password: zllofkbv"`
   );
 }
