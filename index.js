@@ -28,3 +28,30 @@ function printHelpMessage() {
     "Password: zllofkbv"`
   );
 }
+
+// Handles the arguments provided by the user.
+const userArguments = process.argv.slice(2);
+
+if (userArguments.includes("--help") || userArguments.includes("-h")) {
+  printHelpMessage();
+  return;
+}
+
+// The is the default length if none is provided.
+let lengthPassword = 8;
+
+const length =
+  userArguments.indexOf("--length") !== -1
+    ? userArguments.indexOf("--length")
+    : userArguments.indexOf("-l");
+
+if (length !== -1) {
+  const lengthValue = userArguments[length + 1];
+
+  if (!isNaN(lengthValue) && parseInt(lengthValue) > 0) {
+    lengthPassword = parseInt(lengthValue);
+  } else {
+    console.error("Error: Provide a valid length.");
+    return;
+  }
+}
