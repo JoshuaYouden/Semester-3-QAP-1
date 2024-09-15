@@ -3,8 +3,8 @@
 const process = require("node:process");
 
 // Function that generates a password.
-function generatePassword(length = 8) {
-  const characters = "abcdefghijklmnopqrstuvwxyz";
+function generatePassword(length = 8, includeNums = false) {
+  let characters = "abcdefghijklmnopqrstuvwxyz";
   let password = "";
 
   for (let i = 0; i < length; i++) {
@@ -18,14 +18,14 @@ function generatePassword(length = 8) {
 // Function that prints this message if the user inputs "--help" or "-h".
 function printHelpMessage() {
   console.log(
-    `Usage: password-generator --length <Number> 
+    `Usage: password-generator --length <Number>
     
     Example: 
     password-generator --length 8
     password-generator -l 8
     
     Output: 
-    "Password: zllofkbv"`
+    "Password: zlldfkgv"`
   );
 }
 
@@ -37,24 +37,25 @@ if (userArguments.includes("--help") || userArguments.includes("-h")) {
   return;
 }
 
-// The is the default length if none is provided.
+// These are the default settings if none are provided.
 let lengthPassword = 8;
 
-const length =
-  userArguments.indexOf("--length") !== -1
-    ? userArguments.indexOf("--length")
-    : userArguments.indexOf("-l");
-
-if (length !== -1) {
-  const lengthValue = userArguments[length + 1];
-
-  if (!isNaN(lengthValue) && parseInt(lengthValue) > 0) {
-    lengthPassword = parseInt(lengthValue);
-  } else {
-    console.error("Error: Provide a valid length.");
-    return;
+userArguments.forEach((arg, index) => {
+  switch (arg) {
+    case "--length":
+    case "-l":
+      const lengthValue = userArguments[index + 1];
+      if (!isNaN(lengthValue) && parseInt(lengthValue) > 0) {
+        lengthPassword = parseInt(lengthValue);
+      } else {
+        console.error(
+          "Error: Invalid length provided. Please provide a valid number."
+        );
+        return;
+        break;
+      }
   }
-}
+});
 
 const password = generatePassword(lengthPassword);
 
