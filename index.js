@@ -3,8 +3,11 @@
 const process = require("node:process");
 
 // Function that generates a password.
-function generatePassword(length = 8) {
+function generatePassword(length = 8, includeNums = false) {
   const characters = "abcdefghijklmnopqrstuvwxyz";
+  if (includeNums) {
+    characters += "0123456789";
+  }
   let password = "";
 
   for (let i = 0; i < length; i++) {
@@ -18,14 +21,19 @@ function generatePassword(length = 8) {
 // Function that prints this message if the user inputs "--help" or "-h".
 function printHelpMessage() {
   console.log(
-    `Usage: password-generator --length <Number> 
+    `Usage: password-generator [options] <Number>
+
+    Options:
+    --help, -h  --> Displays this help message
+    --length, -l --> Specify the length of the password (Default: 8)
+    --numbers, -n --> Include numbers in the password
     
     Example: 
-    password-generator --length 8
-    password-generator -l 8
+    password-generator --length 8 --numbers
+    password-generator -l 8 -n
     
     Output: 
-    "Password: zllofkbv"`
+    "Password: zll6fk2v"`
   );
 }
 
