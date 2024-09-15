@@ -4,7 +4,7 @@ const process = require("node:process");
 
 // Function that generates a password.
 function generatePassword(length = 8, includeNums = false) {
-  const characters = "abcdefghijklmnopqrstuvwxyz";
+  let characters = "abcdefghijklmnopqrstuvwxyz";
   if (includeNums) {
     characters += "0123456789";
   }
@@ -45,26 +45,32 @@ if (userArguments.includes("--help") || userArguments.includes("-h")) {
   return;
 }
 
-// The is the default length if none is provided.
+// These are the default settings if none are provided.
 let lengthPassword = 8;
+let includeNums = false;
 
-const length =
-  userArguments.indexOf("--length") !== -1
-    ? userArguments.indexOf("--length")
-    : userArguments.indexOf("-l");
-
-if (length !== -1) {
-  const lengthValue = userArguments[length + 1];
-
-  if (!isNaN(lengthValue) && parseInt(lengthValue) > 0) {
-    lengthPassword = parseInt(lengthValue);
-  } else {
-    console.error("Error: Provide a valid length.");
-    return;
+userArguments.forEach((arg, index) => {
+  switch (arg) {
+    case "--length":
+    case "-l":
+      const lengthValue = userArguments[index + 1];
+      if (!isNaN(lengthValue) && parseInt(lengthValue) > 0) {
+        lengthPassword = parseInt(lengthValue);
+      } else {
+        console.error(
+          "Error: Invalid length provided. Please provide a valid number."
+        );
+        return;
+        break;
+      }
+    case "--numbers":
+    case "-n":
+      includeNums = true;
+      break;
   }
-}
+});
 
-const password = generatePassword(lengthPassword);
+const password = generatePassword(lengthPassword, includeNums);
 
 console.log(`Password: ${password}`);
 
