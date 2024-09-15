@@ -46,6 +46,7 @@ if (userArguments.includes("--help") || userArguments.includes("-h")) {
 }
 
 // These are the default settings if none are provided.
+// These are the default settings if none are provided.
 let lengthPassword = 8;
 let includeNums = false;
 
